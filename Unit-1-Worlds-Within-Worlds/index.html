@@ -261,6 +261,26 @@ td.num,th.num{text-align:center; font-variant-numeric:tabular-nums; width:3em; c
 .sticky-note.c3 .tag{color:#9a6b00;}
 .sticky-note.c1 p,.sticky-note.c2 p,.sticky-note.c3 p{color:#262234;}
 
+/* ---------- Split: reading pinned left, exercises right ---------- */
+.split{display:grid; grid-template-columns:minmax(300px,2fr) 3fr; gap:28px; align-items:start;}
+.split-read{
+  position:sticky; top:16px; max-height:calc(100vh - 32px); overflow-y:auto;
+  padding:4px 10px 10px 4px; scrollbar-width:thin;
+}
+.split-read .sticky-board{grid-template-columns:1fr; gap:22px; padding:12px 4px 8px;}
+.split-read .sticky-note{min-height:0;}
+.split-read .timeline{grid-template-columns:1fr; gap:0; padding-left:22px; border-left:3px solid var(--accent-soft);}
+.split-read .tl-item{border-top:none; padding:0 0 18px;}
+.split-read .tl-item::before{left:-33px; top:5px;}
+.split-read h3.sub:first-of-type{margin-top:4px;}
+.split-ex h3.sub:first-child{margin-top:4px;}
+.split-ex .row2{grid-template-columns:1fr;}
+.pane-label{
+  display:inline-block; font-size:.78rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--accent2); background:var(--accent2-soft); padding:4px 10px; border-radius:99px; margin-bottom:6px;
+}
+.split-ex .pane-label{color:var(--accent); background:var(--accent-soft);}
+
 /* ---------- Horizontal timeline ---------- */
 .timeline{
   display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:18px; margin:6px 0 22px; padding-top:6px;
@@ -329,6 +349,8 @@ footer{text-align:center; padding:30px 20px 10px; color:var(--ink-soft); font-si
   .reveal-grid{grid-template-columns:1fr;}
   .checklist{grid-template-columns:1fr;}
   .sticky-board{grid-template-columns:1fr; gap:24px;}
+  .split{grid-template-columns:1fr; gap:10px;}
+  .split-read{position:static; max-height:none; overflow:visible; padding:0;}
   .sticky-note{--r:0deg !important;}
   .timeline{grid-template-columns:1fr; gap:14px;}
   .deck{grid-template-columns:repeat(2,1fr); gap:10px;}
@@ -429,6 +451,9 @@ footer{text-align:center; padding:30px 20px 10px; color:var(--ink-soft); font-si
   <section class="unit" id="s3">
     <div class="sec-head"><span class="idx">3</span><h2>Bài đọc 1: Real and Virtual Communities</h2></div>
 
+    <div class="split">
+    <div class="split-read">
+    <div class="pane-label">Bài đọc — ghim để đối chiếu</div>
     <h3 class="sub">Ý chính từng đoạn (¶1 – ¶3)</h3>
     <div class="sticky-board">
       <div class="sticky-note c1">
@@ -447,7 +472,10 @@ footer{text-align:center; padding:30px 20px 10px; color:var(--ink-soft); font-si
 
     <h3 class="sub">Lịch sử cộng đồng ảo (¶4 – ¶8): Time line</h3>
     <div class="timeline" id="timeline"></div>
+    </div>
 
+    <div class="split-ex">
+    <div class="pane-label">Bài tập</div>
     <div class="reveal" data-reveal>
       <div class="q">ĐÁP ÁN TIME LINE (Details C – mỗi đáp án 2 từ) <span class="toggle">Bấm để xem ▾</span></div>
       <div class="a">1. telegraph &nbsp;&nbsp;2. virtual meetings &nbsp;&nbsp;3. short distances &nbsp;&nbsp;4. share music (đề yêu cầu 2 từ)<br>5. virtual money &nbsp;&nbsp;6. online sports &nbsp;&nbsp;7. active members &nbsp;&nbsp;8. real communities</div>
@@ -490,12 +518,17 @@ footer{text-align:center; padding:30px 20px 10px; color:var(--ink-soft); font-si
         </div>
       </div>
     </div>
+    </div>
+    </div>
   </section>
 
   <!-- ============ 4. READING 2 ============ -->
   <section class="unit" id="s4">
     <div class="sec-head"><span class="idx">4</span><h2>Bài đọc 2: The Power of Two</h2></div>
 
+    <div class="split">
+    <div class="split-read">
+    <div class="pane-label">Bài đọc — ghim để đối chiếu</div>
     <div class="sticky-board">
       <div class="sticky-note c1">
         <span class="tag">¶1</span>
@@ -518,7 +551,10 @@ footer{text-align:center; padding:30px 20px 10px; color:var(--ink-soft); font-si
         <p>Người không song ngữ/bicultural vẫn có lợi. Chỉ cần quá trình học ngôn ngữ mới đã boost executive function (không cần thành thạo hoàn toàn). Sống/đến nước khác hoặc sống trong multicultural community cũng tốt; chỉ cần cố gắng open to văn hóa khác cũng có lợi. Tương lai, nghiên cứu có thể cho thấy tìm hiểu văn hóa mới qua virtual communities cũng beneficial.</p>
       </div>
     </div>
+    </div>
 
+    <div class="split-ex">
+    <div class="pane-label">Bài tập</div>
     <h3 class="sub">Main ideas (Reading 2 – Main Ideas B)</h3>
     <div class="reveal" data-reveal>
       <div class="q">Chọn 4 câu ý chính đúng <span class="toggle">Bấm để xem ▾</span></div>
@@ -549,6 +585,8 @@ footer{text-align:center; padding:30px 20px 10px; color:var(--ink-soft); font-si
     <h3 class="sub">Details C – Câu này có thể thêm vào đoạn nào?</h3>
     <p class="lead">(gợi ý, hãy tự kiểm tra lại) — bấm từng câu để xem đoạn gợi ý.</p>
     <div class="reveal-grid" id="detailsC"></div>
+    </div>
+    </div>
   </section>
 
   <!-- ============ 5. READING SKILLS ============ -->
