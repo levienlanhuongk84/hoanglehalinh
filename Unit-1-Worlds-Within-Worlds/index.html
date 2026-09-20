@@ -78,41 +78,48 @@ h1,h2,h3,h4{font-family:'Roboto', Arial, sans-serif; text-wrap:balance; color:va
 a{color:var(--accent);}
 b,strong{font-weight:700;}
 
-/* ---------- Top bar ---------- */
-.topbar{
-  position:sticky; top:env(safe-area-inset-top, 0px); z-index:50;
-  background:var(--paper); border-bottom:1px solid var(--line);
-  box-shadow:0 2px 10px -6px rgba(38,34,52,.18);
+/* ---------- Layout: sticky sidebar + main ---------- */
+.shell{display:flex; align-items:flex-start; min-height:100vh;}
+.toc{
+  width:290px; flex-shrink:0; position:sticky; top:env(safe-area-inset-top, 0px);
+  height:100vh; overflow-y:auto; padding:26px 18px 30px;
+  background:var(--paper); border-right:1px solid var(--line);
+  display:flex; flex-direction:column; gap:0;
 }
-.progress{height:4px; background:var(--line);}
-.progress-bar{height:100%; width:0%; background:var(--grad); transition:width .2s ease;}
-.topbar-inner{
-  display:flex; align-items:center; gap:22px; padding:12px 40px;
-}
-.brand{
-  display:flex; align-items:center; gap:10px; flex-shrink:0; text-decoration:none; color:var(--ink);
-}
+.brand{display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--ink); margin-bottom:18px;}
 .brand .mark{
-  width:36px; height:36px; border-radius:10px; background:linear-gradient(135deg,var(--accent),var(--accent-deep));
-  display:flex; align-items:center; justify-content:center; color:#fff; font-weight:900; font-size:1rem;
+  width:42px; height:42px; border-radius:12px; flex-shrink:0; background:linear-gradient(135deg,var(--accent),var(--accent-deep));
+  display:flex; align-items:center; justify-content:center; color:#fff; font-weight:900; font-size:1.05rem;
 }
-.brand .name{font-weight:700; font-size:1.05rem; line-height:1.15;}
-.brand .name small{display:block; font-weight:400; color:var(--ink-soft); font-size:.78rem;}
-.topnav{
-  display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; flex:1; padding:2px 0;
+.brand .name{font-weight:700; font-size:1.05rem; line-height:1.2;}
+.brand .name small{display:block; font-weight:400; color:var(--ink-soft); font-size:.8rem;}
+.progress{height:6px; border-radius:99px; background:var(--line); overflow:hidden; margin-bottom:6px;}
+.progress-bar{height:100%; width:0%; background:var(--grad); transition:width .2s ease;}
+.progress-label{font-size:.78rem; color:var(--ink-soft); margin-bottom:20px;}
+.toc nav{display:flex; flex-direction:column; gap:4px;}
+.toc nav a{
+  display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--ink-soft); font-weight:500; font-size:1rem;
+  padding:10px 12px; border-radius:11px; transition:background .15s,color .15s;
 }
-.topnav::-webkit-scrollbar{display:none;}
-.topnav a{
-  white-space:nowrap; text-decoration:none; color:var(--ink-soft); font-weight:500; font-size:.95rem;
-  padding:8px 14px; border-radius:99px; border:1px solid transparent; transition:background .15s,color .15s;
+.toc nav a .n{
+  width:26px; height:26px; border-radius:8px; flex-shrink:0; background:var(--accent2-soft); color:var(--accent2);
+  display:flex; align-items:center; justify-content:center; font-weight:700; font-size:.85rem;
 }
-.topnav a .n{color:var(--accent2); font-weight:700; margin-right:5px;}
-.topnav a:hover{background:var(--accent-soft); color:var(--ink);}
-.topnav a.active{background:var(--accent); color:var(--accent-ink); border-color:var(--accent);}
-.topnav a.active .n{color:var(--accent-ink);}
+.toc nav a:hover{background:var(--accent-soft); color:var(--ink);}
+.toc nav a.active{background:var(--accent); color:var(--accent-ink);}
+.toc nav a.active .n{background:var(--grad); color:#fff;}
+.toc .foot{margin-top:auto; padding-top:18px; font-size:.78rem; color:var(--ink-soft);}
+
+.menu-btn{
+  display:none; position:fixed; top:calc(env(safe-area-inset-top, 0px) + 12px); left:12px; z-index:60;
+  background:var(--accent); color:#fff; border:none; border-radius:12px; width:46px; height:46px;
+  font-size:1.3rem; box-shadow:0 6px 18px -6px rgba(38,34,52,.5); cursor:pointer;
+}
+.scrim{display:none; position:fixed; inset:0; background:rgba(38,34,52,.45); z-index:55;}
+.scrim.show{display:block;}
 
 /* ---------- Main ---------- */
-main{padding:28px 40px 80px;}
+main{flex:1; min-width:0; padding:28px 40px 80px;}
 
 .hero{
   position:relative; overflow:hidden;
@@ -140,7 +147,7 @@ main{padding:28px 40px 80px;}
 }
 .hero .tip b{color:#fcb715;}
 
-section.unit{scroll-margin-top:90px; margin-bottom:52px;}
+section.unit{scroll-margin-top:24px; margin-bottom:52px;}
 .sec-head{
   display:flex; align-items:center; gap:14px; margin:0 0 18px; padding-bottom:12px; border-bottom:2px solid var(--line);
 }
@@ -302,37 +309,63 @@ td.num,th.num{text-align:center; font-variant-numeric:tabular-nums; width:3em; c
 footer{text-align:center; padding:30px 20px 10px; color:var(--ink-soft); font-size:.9rem;}
 
 @media (max-width: 900px){
-  .topbar-inner{padding:10px 16px; gap:12px;}
-  .brand .name small{display:none;}
-  main{padding:18px 16px 70px;}
-  .hero{grid-template-columns:1fr; padding:28px 22px;}
+  .shell{display:block;}
+  .toc{
+    position:fixed; left:0; top:0; height:100%; width:min(82vw,320px); z-index:58;
+    box-shadow:0 10px 40px rgba(0,0,0,.3); transform:translateX(-105%); transition:transform .25s ease;
+    padding-top:calc(env(safe-area-inset-top, 0px) + 22px);
+  }
+  .toc.open{transform:translateX(0);}
+  .menu-btn{display:block;}
+  main{padding:calc(env(safe-area-inset-top, 0px) + 70px) 16px 70px;}
+  section.unit{scroll-margin-top:calc(env(safe-area-inset-top, 0px) + 76px);}
+  .hero{grid-template-columns:1fr; padding:26px 20px; gap:18px;}
   .hero h1{font-size:2rem;}
+  .hero p{font-size:1rem;}
   body{font-size:17px;}
-  .sec-head h2{font-size:1.45rem;}
+  .sec-head h2{font-size:1.4rem;}
+  h3.sub{font-size:1.15rem;}
+  .row2{grid-template-columns:1fr;}
+  .reveal-grid{grid-template-columns:1fr;}
+  .checklist{grid-template-columns:1fr;}
+  .sticky-board{grid-template-columns:1fr; gap:24px;}
+  .sticky-note{--r:0deg !important;}
+  .timeline{grid-template-columns:1fr; gap:14px;}
+  .deck{grid-template-columns:repeat(2,1fr); gap:10px;}
+  .flashcard{height:150px;}
+  .face{padding:12px;}
+  .face .word{font-size:1.1rem;}
+  .face .def{font-size:.8rem;}
+  .card,.box,.gcard,.method{padding:16px 16px;}
+  th,td{padding:11px 12px; font-size:.95rem;}
 }
 </style>
 </head>
 <body>
 
-<header class="topbar">
+<button class="menu-btn" id="menuBtn" aria-label="Mở mục lục">☰</button>
+<div class="scrim" id="scrim"></div>
+
+<div class="shell">
+<aside class="toc" id="toc">
+  <a class="brand" href="#top">
+    <span class="mark">U1</span>
+    <span class="name">Worlds Within Worlds<small>Tóm tắt ôn thi Unit 1</small></span>
+  </a>
   <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
-  <div class="topbar-inner">
-    <a class="brand" href="#top">
-      <span class="mark">U1</span>
-      <span class="name">Worlds Within Worlds<small>Tóm tắt ôn thi Unit 1</small></span>
-    </a>
-    <nav class="topnav" id="navLinks">
-      <a href="#s1"><span class="n">1</span>Từ vựng</a>
-      <a href="#s2"><span class="n">2</span>Video</a>
-      <a href="#s3"><span class="n">3</span>Bài đọc 1</a>
-      <a href="#s4"><span class="n">4</span>Bài đọc 2</a>
-      <a href="#s5"><span class="n">5</span>Reading skills</a>
-      <a href="#s6"><span class="n">6</span>Writing</a>
-      <a href="#s7"><span class="n">7</span>Grammar</a>
-      <a href="#s8"><span class="n">8</span>Sửa lỗi &amp; con số</a>
-    </nav>
-  </div>
-</header>
+  <div class="progress-label" id="progressLabel">0% đã đọc</div>
+  <nav id="navLinks">
+    <a href="#s1"><span class="n">1</span>Từ vựng (20 từ)</a>
+    <a href="#s2"><span class="n">2</span>Video: Amber Case</a>
+    <a href="#s3"><span class="n">3</span>Bài đọc 1: Real &amp; Virtual Communities</a>
+    <a href="#s4"><span class="n">4</span>Bài đọc 2: The Power of Two</a>
+    <a href="#s5"><span class="n">5</span>Reading skills</a>
+    <a href="#s6"><span class="n">6</span>Writing: Opinion essay</a>
+    <a href="#s7"><span class="n">7</span>Grammar: Adjective clauses</a>
+    <a href="#s8"><span class="n">8</span>Chỗ cần sửa &amp; con số cần nhớ</a>
+  </nav>
+  <div class="foot">Từ vựng → time line → 6 cách hỗ trợ ý → cấu trúc essay → adjective clauses</div>
+</aside>
 
 <main id="top">
   <div class="hero">
@@ -636,6 +669,7 @@ footer{text-align:center; padding:30px 20px 10px; color:var(--ink-soft); font-si
 
   <footer>Unit 1 · Worlds Within Worlds — tóm tắt ôn thi, giữ nguyên nội dung gốc.</footer>
 </main>
+</div>
 
 <script>
 (function(){
@@ -789,26 +823,32 @@ footer{text-align:center; padding:30px 20px 10px; color:var(--ink-soft); font-si
   var sections = Array.prototype.slice.call(document.querySelectorAll('section.unit'));
   var links = Array.prototype.slice.call(document.querySelectorAll('#navLinks a'));
   var progressBar = document.getElementById('progressBar');
+  var progressLabel = document.getElementById('progressLabel');
   function onScroll(){
     var scrollTop = window.scrollY || document.documentElement.scrollTop;
     var docHeight = document.documentElement.scrollHeight - window.innerHeight;
     var pct = docHeight>0 ? Math.min(100, Math.round((scrollTop/docHeight)*100)) : 0;
     progressBar.style.width = pct+'%';
+    progressLabel.textContent = pct+'% đã đọc';
     var current = null;
     sections.forEach(function(sec){ if (sec.getBoundingClientRect().top - 120 <= 0) current = sec; });
-    var nav = document.getElementById('navLinks');
     links.forEach(function(a){
-      var active = current && a.getAttribute('href') === '#'+current.id;
-      var was = a.classList.contains('active');
-      a.classList.toggle('active', !!active);
-      if(active && !was){
-        var left = a.offsetLeft - (nav.clientWidth - a.offsetWidth)/2;
-        nav.scrollTo({left:Math.max(0,left), behavior:'smooth'});
-      }
+      a.classList.toggle('active', !!(current && a.getAttribute('href') === '#'+current.id));
     });
   }
   window.addEventListener('scroll', onScroll, {passive:true});
   onScroll();
+
+  var menuBtn = document.getElementById('menuBtn');
+  var toc = document.getElementById('toc');
+  var scrim = document.getElementById('scrim');
+  function closeMenu(){ toc.classList.remove('open'); scrim.classList.remove('show'); }
+  menuBtn.addEventListener('click', function(){
+    var open = !toc.classList.contains('open');
+    toc.classList.toggle('open', open); scrim.classList.toggle('show', open);
+  });
+  scrim.addEventListener('click', closeMenu);
+  links.forEach(function(a){ a.addEventListener('click', closeMenu); });
 })();
 </script>
 
