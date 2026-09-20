@@ -1,0 +1,816 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Worlds Within Worlds</title>
+<meta name="description" content="Tóm tắt ôn thi tương tác Unit 1: từ vựng, 2 bài đọc, reading skills, writing và grammar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf8fc;
+  --paper:#ffffff;
+  --ink:#262234;
+  --ink-soft:#4a4658;
+  --line:#e3d9ef;
+  --accent:#613087;
+  --accent-ink:#ffffff;
+  --accent-deep:#3d1f57;
+  --accent2:#c4501f;
+  --accent2-soft:#fbeadc;
+  --accent-soft:#ece6f4;
+  --danger:#c0392b;
+  --card:#f5f2fa;
+  --grad:linear-gradient(90deg,#dd5a28,#f48220,#fcb715);
+  --shadow: 0 1px 2px rgba(38,34,52,.06), 0 10px 26px -16px rgba(38,34,52,.22);
+  --radius: 16px;
+}
+:root:not([data-theme="light"]){
+  @media (prefers-color-scheme: dark){
+    --bg:#150f1e;
+    --paper:#1e1630;
+    --ink:#f1eafb;
+    --ink-soft:#b9a9d2;
+    --line:#3a2c52;
+    --accent:#c6a8e8;
+    --accent-ink:#241536;
+    --accent-deep:#7e5aa0;
+    --accent2:#f0985a;
+    --accent2-soft:#3a2716;
+    --accent-soft:#2b2040;
+    --danger:#e4796b;
+    --card:#241a38;
+    --shadow: 0 1px 2px rgba(0,0,0,.5), 0 10px 26px -16px rgba(0,0,0,.65);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#150f1e;
+  --paper:#1e1630;
+  --ink:#f1eafb;
+  --ink-soft:#b9a9d2;
+  --line:#3a2c52;
+  --accent:#c6a8e8;
+  --accent-ink:#241536;
+  --accent-deep:#7e5aa0;
+  --accent2:#f0985a;
+  --accent2-soft:#3a2716;
+  --accent-soft:#2b2040;
+  --danger:#e4796b;
+  --card:#241a38;
+  --shadow: 0 1px 2px rgba(0,0,0,.5), 0 10px 26px -16px rgba(0,0,0,.65);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{transition:none!important;animation:none!important;} }
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Roboto', Arial, system-ui, sans-serif;
+  font-size:18px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:'Roboto', Arial, sans-serif; text-wrap:balance; color:var(--ink); margin:0; font-weight:700;}
+::selection{background:var(--accent); color:var(--accent-ink);}
+a{color:var(--accent);}
+b,strong{font-weight:700;}
+
+/* ---------- Top bar ---------- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:50;
+  background:var(--paper); border-bottom:1px solid var(--line);
+  box-shadow:0 2px 10px -6px rgba(38,34,52,.18);
+}
+.progress{height:4px; background:var(--line);}
+.progress-bar{height:100%; width:0%; background:var(--grad); transition:width .2s ease;}
+.topbar-inner{
+  display:flex; align-items:center; gap:22px; padding:12px 40px;
+}
+.brand{
+  display:flex; align-items:center; gap:10px; flex-shrink:0; text-decoration:none; color:var(--ink);
+}
+.brand .mark{
+  width:36px; height:36px; border-radius:10px; background:linear-gradient(135deg,var(--accent),var(--accent-deep));
+  display:flex; align-items:center; justify-content:center; color:#fff; font-weight:900; font-size:1rem;
+}
+.brand .name{font-weight:700; font-size:1.05rem; line-height:1.15;}
+.brand .name small{display:block; font-weight:400; color:var(--ink-soft); font-size:.78rem;}
+.topnav{
+  display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; flex:1; padding:2px 0;
+}
+.topnav::-webkit-scrollbar{display:none;}
+.topnav a{
+  white-space:nowrap; text-decoration:none; color:var(--ink-soft); font-weight:500; font-size:.95rem;
+  padding:8px 14px; border-radius:99px; border:1px solid transparent; transition:background .15s,color .15s;
+}
+.topnav a .n{color:var(--accent2); font-weight:700; margin-right:5px;}
+.topnav a:hover{background:var(--accent-soft); color:var(--ink);}
+.topnav a.active{background:var(--accent); color:var(--accent-ink); border-color:var(--accent);}
+.topnav a.active .n{color:var(--accent-ink);}
+
+/* ---------- Main ---------- */
+main{padding:28px 40px 80px;}
+
+.hero{
+  position:relative; overflow:hidden;
+  background:linear-gradient(120deg, var(--accent-deep) 0%, var(--accent) 60%, #7e5aa0 100%);
+  color:#fff; border-radius:22px; padding:38px 40px; margin-bottom:22px; box-shadow:var(--shadow);
+  display:grid; grid-template-columns:1.4fr 1fr; gap:28px; align-items:center;
+}
+.hero::after{
+  content:''; position:absolute; right:-90px; top:-120px; width:360px; height:360px; border-radius:50%;
+  background:radial-gradient(circle, rgba(252,183,21,.55) 0%, rgba(244,130,32,.35) 35%, rgba(221,90,40,0) 70%);
+  pointer-events:none;
+}
+.hero > *{position:relative; z-index:1;}
+.hero .eyebrow{text-transform:uppercase; letter-spacing:.14em; font-size:.8rem; font-weight:700; opacity:.85;}
+.hero h1{color:#fff; font-size:clamp(2rem,4.5vw,3.1rem); font-weight:900; margin:6px 0 8px; line-height:1.1;}
+.hero p{margin:0; opacity:.95; font-size:1.1rem; max-width:60ch;}
+.hero .tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:18px;}
+.hero .tags span{
+  background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.35);
+  padding:6px 14px; border-radius:99px; font-size:.9rem; font-weight:500;
+}
+.hero .tip{
+  background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.3); border-radius:16px; padding:18px 20px; font-size:1rem; line-height:1.55;
+  backdrop-filter:blur(6px);
+}
+.hero .tip b{color:#fcb715;}
+
+section.unit{scroll-margin-top:90px; margin-bottom:52px;}
+.sec-head{
+  display:flex; align-items:center; gap:14px; margin:0 0 18px; padding-bottom:12px; border-bottom:2px solid var(--line);
+}
+.sec-head .idx{
+  width:44px; height:44px; border-radius:12px; flex-shrink:0; background:var(--grad); color:#fff;
+  display:flex; align-items:center; justify-content:center; font-weight:900; font-size:1.1rem;
+}
+.sec-head h2{font-size:1.75rem; font-weight:700;}
+
+h3.sub{font-size:1.25rem; margin:26px 0 12px; color:var(--accent); font-weight:700;}
+h3.sub .pg{font-weight:400; color:var(--ink-soft); font-size:.8em;}
+p.lead{color:var(--ink-soft); margin:0 0 14px; font-size:1.02rem;}
+ul.bullets{margin:0 0 16px; padding-left:1.2em;}
+ul.bullets li{margin-bottom:9px;}
+
+.row2{display:grid; grid-template-columns:repeat(auto-fit,minmax(360px,1fr)); gap:20px; align-items:start;}
+
+/* ---------- Cards (reference style) ---------- */
+.card{
+  background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:22px 24px; box-shadow:var(--shadow);
+}
+.card h4{font-size:1.15rem; margin:0 0 8px;}
+.card .icon{
+  width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-weight:900; font-size:1.05rem; margin-bottom:14px; color:var(--accent); background:var(--accent-soft);
+}
+.card.tint-o{border-color:color-mix(in srgb, var(--accent2) 45%, transparent);}
+.card.tint-o .icon{background:var(--accent2-soft); color:var(--accent2);}
+.card.tint-p{border-color:color-mix(in srgb, var(--accent) 45%, transparent);}
+
+/* ---------- Flashcards ---------- */
+.deck{display:grid; grid-template-columns:repeat(auto-fill, minmax(210px,1fr)); gap:14px; margin-bottom:8px;}
+.flashcard{perspective:1000px; height:140px; cursor:pointer;}
+.flashcard-inner{position:relative; width:100%; height:100%; transition:transform .5s cubic-bezier(.4,.2,.2,1); transform-style:preserve-3d;}
+.flashcard.flipped .flashcard-inner{transform:rotateY(180deg);}
+.face{
+  position:absolute; inset:0; backface-visibility:hidden; border-radius:14px; padding:14px 16px;
+  display:flex; flex-direction:column; justify-content:center; box-shadow:var(--shadow); border:1px solid var(--line);
+}
+.face.front{background:var(--paper);}
+.face.back{background:var(--accent-soft); transform:rotateY(180deg); border-color:color-mix(in srgb, var(--accent) 40%, transparent);}
+.face .word{font-weight:700; font-size:1.25rem; margin-bottom:2px;}
+.face .pos{color:var(--accent2); font-size:.8rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em;}
+.face .vi{font-weight:700; color:var(--accent); font-size:1.05rem; margin-bottom:5px;}
+.face .def{font-size:.85rem; color:var(--ink-soft); line-height:1.4;}
+.face .hint{position:absolute; bottom:9px; right:12px; font-size:.72rem; color:var(--ink-soft); opacity:.6;}
+.deck-caption{font-size:.85rem; color:var(--ink-soft); margin:0 0 6px;}
+
+/* ---------- Tables ---------- */
+.twrap{overflow-x:auto; margin-bottom:18px; border-radius:var(--radius); border:1px solid var(--line); box-shadow:var(--shadow); background:var(--paper);}
+table{border-collapse:collapse; width:100%; font-size:1rem;}
+th,td{padding:13px 16px; text-align:left; border-bottom:1px solid var(--line); vertical-align:top;}
+thead th{background:var(--accent-soft); font-weight:700; color:var(--accent); font-size:.85rem; text-transform:uppercase; letter-spacing:.04em;}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr:hover{background:var(--card);}
+td.num,th.num{text-align:center; font-variant-numeric:tabular-nums; width:3em; color:var(--ink-soft); white-space:nowrap;}
+
+/* ---------- Boxes ---------- */
+.box{border-radius:var(--radius); padding:18px 22px; margin:16px 0 22px; border:1px solid var(--line); background:var(--paper); box-shadow:var(--shadow);}
+.box h4{margin:0 0 8px; font-size:1.1rem; color:var(--accent);}
+.box p{margin:0 0 6px;}
+.box p:last-child{margin-bottom:0;}
+.box.amber{background:var(--accent2-soft); border-color:color-mix(in srgb, var(--accent2) 40%, transparent);}
+.box.amber h4{color:var(--accent2);}
+.box.fix{background:color-mix(in srgb, var(--danger) 10%, var(--paper)); border-color:color-mix(in srgb, var(--danger) 45%, transparent);}
+.box.fix h4{color:var(--danger);}
+
+/* ---------- Reveal ---------- */
+.reveal-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:12px; margin-bottom:10px;}
+.reveal{
+  border:1px dashed color-mix(in srgb, var(--accent) 45%, transparent); border-radius:14px; padding:14px 18px; margin:0; background:var(--paper); cursor:pointer;
+}
+.reveal + .reveal{margin-top:12px;}
+.reveal .q{font-weight:500; display:flex; justify-content:space-between; gap:12px; align-items:center;}
+.reveal .q .toggle{font-size:.8rem; color:var(--accent2); font-weight:700; white-space:nowrap;}
+.reveal .a{display:none; margin-top:10px; padding-top:10px; border-top:1px solid var(--line); color:var(--ink-soft);}
+.reveal .a b{color:var(--ink);}
+.reveal.open .a{display:block;}
+.reveal.open{border-style:solid; border-color:var(--accent2); background:var(--accent2-soft);}
+
+/* ---------- Sticky notes (ý chính từng đoạn) ---------- */
+.sticky-board{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:26px 20px;
+  margin:10px 0 26px; padding:14px 6px 10px;
+}
+.sticky-note{
+  position:relative; padding:26px 20px 20px;
+  border-radius:3px 3px 26px 3px / 3px 3px 10px 3px;
+  box-shadow:3px 8px 18px -6px rgba(38,34,52,.35), inset 0 1px 0 rgba(255,255,255,.5);
+  transform:rotate(var(--r,0deg)); transition:transform .2s ease, box-shadow .2s ease;
+  min-height:150px;
+}
+.sticky-note:nth-child(5n+1){--r:-1.4deg;}
+.sticky-note:nth-child(5n+2){--r:1.1deg;}
+.sticky-note:nth-child(5n+3){--r:-0.7deg;}
+.sticky-note:nth-child(5n+4){--r:1.5deg;}
+.sticky-note:nth-child(5n+5){--r:-1.1deg;}
+.sticky-note:hover{transform:rotate(0deg) scale(1.02); z-index:2; box-shadow:4px 12px 26px -8px rgba(38,34,52,.45);}
+.sticky-note::before{
+  content:''; position:absolute; top:-11px; left:50%; transform:translateX(-50%) rotate(-2deg);
+  width:64px; height:20px; background:rgba(255,255,255,.6); border:1px solid rgba(0,0,0,.06);
+  box-shadow:0 2px 4px rgba(0,0,0,.08);
+}
+.sticky-note .tag{font-family:'Caveat',cursive; font-size:1.75rem; font-weight:700; line-height:1; margin-bottom:8px; display:inline-block;}
+.sticky-note p{margin:0; font-size:1rem; color:var(--ink); line-height:1.55;}
+.sticky-note.c1{background:#f0e6ff; color:#262234;}
+.sticky-note.c1 .tag{color:#613087;}
+.sticky-note.c2{background:#ffe9d4; color:#262234;}
+.sticky-note.c2 .tag{color:#c4501f;}
+.sticky-note.c3{background:#fff6cf; color:#262234;}
+.sticky-note.c3 .tag{color:#9a6b00;}
+.sticky-note.c1 p,.sticky-note.c2 p,.sticky-note.c3 p{color:#262234;}
+
+/* ---------- Horizontal timeline ---------- */
+.timeline{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:18px; margin:6px 0 22px; padding-top:6px;
+}
+.tl-item{
+  position:relative; padding-top:18px; border-top:3px solid var(--accent-soft);
+}
+.tl-item::before{
+  content:''; position:absolute; left:0; top:-9px; width:14px; height:14px; border-radius:50%;
+  background:var(--accent2); border:3px solid var(--paper); box-shadow:0 0 0 2px var(--accent2);
+}
+.tl-item .when{font-weight:900; color:var(--accent2); font-size:1.05rem; letter-spacing:.02em;}
+.tl-item .what{font-weight:700; margin:3px 0 6px; font-size:1.1rem; color:var(--accent);}
+.tl-item .desc{color:var(--ink-soft); font-size:.95rem;}
+
+/* ---------- Method cards (6 cách hỗ trợ) ---------- */
+.methods{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px; margin-bottom:14px;}
+.method{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:18px 20px; box-shadow:var(--shadow);}
+.method .no{width:38px; height:38px; border-radius:50%; background:var(--accent-soft); color:var(--accent); font-weight:900; display:flex; align-items:center; justify-content:center; margin-bottom:10px;}
+.method .name{font-weight:700; font-size:1.05rem; margin-bottom:6px;}
+.method .cue{color:var(--ink-soft); font-size:.95rem; font-style:italic;}
+
+/* ---------- Grammar cards ---------- */
+.gcards{display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:16px; margin-bottom:18px;}
+.gcard{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:20px 22px; box-shadow:var(--shadow);}
+.gcard h4{margin:0 0 6px; color:var(--accent); font-size:1.15rem;}
+.gcard .formula{font-weight:700; background:var(--accent-soft); color:var(--accent); padding:7px 12px; border-radius:9px; display:inline-block; margin:6px 0; font-size:.95rem;}
+.gcard .rule{font-size:.95rem; color:var(--ink-soft); margin:6px 0;}
+.gcard .ex{font-size:.98rem; margin-top:10px; padding-top:10px; border-top:1px dashed var(--line); font-style:italic;}
+.gcard .ex u{text-decoration-color:var(--accent2); text-decoration-thickness:2px;}
+
+/* ---------- Checklist ---------- */
+.checklist{list-style:none; margin:0 0 20px; padding:0; display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:10px;}
+.checklist li{
+  display:flex; gap:12px; align-items:flex-start; background:var(--paper); border:1px solid var(--line);
+  border-radius:12px; padding:13px 16px; cursor:pointer; font-size:1rem;
+}
+.checklist li.checked{background:var(--accent-soft); border-color:var(--accent); text-decoration:line-through; color:var(--ink-soft);}
+.checklist li input{margin-top:4px; accent-color:var(--accent); width:18px; height:18px; flex-shrink:0;}
+
+.numgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px; margin-bottom:18px;}
+.numcell{background:var(--paper); border:1px solid var(--line); border-radius:14px; padding:18px; box-shadow:var(--shadow);}
+.numcell .big{font-weight:900; color:var(--accent2); font-size:1.3rem; line-height:1.2;}
+.numcell .lbl{font-size:.95rem; color:var(--ink-soft); margin-top:6px;}
+
+footer{text-align:center; padding:30px 20px 10px; color:var(--ink-soft); font-size:.9rem;}
+
+@media (max-width: 900px){
+  .topbar-inner{padding:10px 16px; gap:12px;}
+  .brand .name small{display:none;}
+  main{padding:18px 16px 70px;}
+  .hero{grid-template-columns:1fr; padding:28px 22px;}
+  .hero h1{font-size:2rem;}
+  body{font-size:17px;}
+  .sec-head h2{font-size:1.45rem;}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+  <div class="topbar-inner">
+    <a class="brand" href="#top">
+      <span class="mark">U1</span>
+      <span class="name">Worlds Within Worlds<small>Tóm tắt ôn thi Unit 1</small></span>
+    </a>
+    <nav class="topnav" id="navLinks">
+      <a href="#s1"><span class="n">1</span>Từ vựng</a>
+      <a href="#s2"><span class="n">2</span>Video</a>
+      <a href="#s3"><span class="n">3</span>Bài đọc 1</a>
+      <a href="#s4"><span class="n">4</span>Bài đọc 2</a>
+      <a href="#s5"><span class="n">5</span>Reading skills</a>
+      <a href="#s6"><span class="n">6</span>Writing</a>
+      <a href="#s7"><span class="n">7</span>Grammar</a>
+      <a href="#s8"><span class="n">8</span>Sửa lỗi &amp; con số</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div>
+      <div class="eyebrow">Unit 1 · Tóm tắt ôn thi</div>
+      <h1>Worlds Within Worlds</h1>
+      <p>Từ vựng · Video · 2 bài đọc · Reading skills · Writing · Grammar</p>
+      <div class="tags">
+        <span>20 từ vựng</span><span>2 bài đọc</span><span>Adjective clauses</span><span>Opinion essay</span>
+      </div>
+    </div>
+    <div class="tip">
+      <b>Cách ôn gợi ý:</b> Từ vựng → time line → 6 cách hỗ trợ ý → cấu trúc essay → adjective clauses. Che cột nghĩa rồi tự đoán để nhớ lâu hơn. Chúc bạn thi tốt!
+    </div>
+  </div>
+
+  <!-- ============ 1. TỪ VỰNG ============ -->
+  <section class="unit" id="s1">
+    <div class="sec-head"><span class="idx">1</span><h2>Từ vựng (20 từ)</h2></div>
+    <p class="lead">Chạm vào thẻ để lật và tự kiểm tra nghĩa.</p>
+
+    <h3 class="sub">Bài 1 – Real and Virtual Communities <span class="pg">(trang 4)</span></h3>
+    <div class="deck" data-deck="1"></div>
+
+    <h3 class="sub">Bài 2 – The Power of Two <span class="pg">(trang 10)</span></h3>
+    <div class="deck" data-deck="2"></div>
+
+    <h3 class="sub">Từ phụ trong bài đọc <span class="pg">(chú thích cuối trang)</span></h3>
+    <div class="twrap">
+      <table>
+        <thead><tr><th style="width:28%">Từ</th><th>Nghĩa</th></tr></thead>
+        <tbody id="minorWords"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ 2. VIDEO ============ -->
+  <section class="unit" id="s2">
+    <div class="sec-head"><span class="idx">2</span><h2>Video: Amber Case – Caring for your second self</h2></div>
+    <div class="row2">
+      <div class="card tint-p">
+        <div class="icon">▶</div>
+        <h4>Nội dung chính</h4>
+        <ul class="bullets" style="margin-bottom:0">
+          <li><b>First self</b> = con người ngoài đời thực. <b>Second self</b> = con người của bạn khi online.</li>
+          <li>Cách con người giao tiếp và chia sẻ thông tin đã thay đổi gần đây; ai cũng có email và nhiều tài khoản mạng xã hội.</li>
+          <li>Mạng xã hội thường vui và thú vị nhưng cũng có thể là vấn đề.</li>
+          <li>Cần cẩn thận cách thể hiện second self, vì một bài đăng cũ có thể khiến bạn mất cơ hội xin việc.</li>
+          <li>Nên có cả tài khoản riêng tư và công khai; dùng nickname thay vì tên thật là ý hay.</li>
+        </ul>
+      </div>
+      <div class="card tint-o">
+        <div class="icon">T/F</div>
+        <h4>Lưu ý khi làm bài True/False</h4>
+        <p style="margin:0">Câu nói "không nên có cả tài khoản private và public" là <b>False</b>; câu "hầu hết mọi người chia sẻ hàng nghìn trải nghiệm online mỗi ngày" cũng là <b>False</b> (theo bài làm của bạn).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. READING 1 ============ -->
+  <section class="unit" id="s3">
+    <div class="sec-head"><span class="idx">3</span><h2>Bài đọc 1: Real and Virtual Communities</h2></div>
+
+    <h3 class="sub">Ý chính từng đoạn (¶1 – ¶3)</h3>
+    <div class="sticky-board">
+      <div class="sticky-note c1">
+        <span class="tag">¶1</span>
+        <p>Phần lớn lịch sử, người ta sống ở rural areas, nhóm nhỏ tối đa 150 người. Khoảng 9,500 năm trước xuất hiện làng và thị trấn: an toàn hơn, chia sẻ thức ăn và đồ dùng. Sau đó urban living mang lại nhiều lợi thế: việc làm, trường học, y tế, nhiều cơ hội gặp gỡ. Vì theo Aristotle, bản chất con người là xã hội.</p>
+      </div>
+      <div class="sticky-note c2">
+        <span class="tag">¶2</span>
+        <p>Theo Liên Hợp Quốc, hơn một nửa dân số thế giới sống ở thị trấn, thành phố, megacity. Paradox: có nhiều cơ hội xã hội nhưng đời sống thành phố có thể cô đơn: bị bao quanh bởi hàng triệu người nhưng đều là người lạ.</p>
+      </div>
+      <div class="sticky-note c3">
+        <span class="tag">¶3</span>
+        <p>Vì nghịch lý đó nên cộng đồng ảo rất phổ biến. Lợi thế: tham gia từ khắp thế giới mà không cần ra khỏi nhà, dễ tìm người có cùng sở thích.</p>
+      </div>
+    </div>
+
+    <h3 class="sub">Lịch sử cộng đồng ảo (¶4 – ¶8): Time line</h3>
+    <div class="timeline" id="timeline"></div>
+
+    <div class="reveal" data-reveal>
+      <div class="q">ĐÁP ÁN TIME LINE (Details C – mỗi đáp án 2 từ) <span class="toggle">Bấm để xem ▾</span></div>
+      <div class="a">1. telegraph &nbsp;&nbsp;2. virtual meetings &nbsp;&nbsp;3. short distances &nbsp;&nbsp;4. share music (đề yêu cầu 2 từ)<br>5. virtual money &nbsp;&nbsp;6. online sports &nbsp;&nbsp;7. active members &nbsp;&nbsp;8. real communities</div>
+    </div>
+
+    <h3 class="sub">Main ideas (Read B)</h3>
+    <div class="reveal" data-reveal>
+      <div class="q">Bốn ý chính đúng là những câu nào? <span class="toggle">Bấm để xem ▾</span></div>
+      <div class="a">Gợi ý bốn ý chính: <b>1</b> (khó kết nối với người khác khi sống ở thành phố lớn), <b>2</b> (cộng đồng ảo có lịch sử dài từ cuối 1800s), <b>4</b> (cộng đồng ảo có lợi thế hơn cộng đồng đời thực) và <b>6</b> (tương lai cộng đồng ảo có thể quan trọng hơn). Câu 3 (Citizen's Band) chỉ là chi tiết phụ; câu 5 (tham gia nhiều cộng đồng thì có nhiều bạn) là ý tác giả không nói. Bạn nên tự đối chiếu lại với bài đọc.</div>
+    </div>
+
+    <div class="row2">
+      <div>
+        <h3 class="sub">Apply E – Tác giả hỗ trợ ý kiến bằng cách nào?</h3>
+        <div class="twrap">
+          <table>
+            <thead><tr><th class="num">Câu</th><th>Ý trong bài</th><th>Cách hỗ trợ</th></tr></thead>
+            <tbody>
+              <tr><td class="num">a (¶1)</td><td>Larger communities are safer than smaller ones</td><td>NS (No support)</td></tr>
+              <tr><td class="num">b (¶2)</td><td>Most people live in cities these days</td><td>1 – Citation / specific reference (theo United Nations)</td></tr>
+              <tr><td class="num">c (¶2)</td><td>People in cities can feel lonely</td><td>2 – General research ("research suggests")</td></tr>
+              <tr><td class="num">d (¶3)</td><td>Online communities may be better than real ones</td><td>5 – Reasons (vì tham gia từ mọi nơi, dễ tìm người cùng sở thích)</td></tr>
+              <tr><td class="num">e (¶5)</td><td>Members use special expressions</td><td>4 – Examples ("negatory", "copy that")</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <h3 class="sub">Critical thinking – Mục đích của tác giả khi nhắc thông tin đó</h3>
+        <div class="twrap">
+          <table>
+            <thead><tr><th>Thông tin</th><th>Tác giả muốn…</th></tr></thead>
+            <tbody>
+              <tr><td>Lời của Aristotle</td><td>ủng hộ ý rằng gặp gỡ người khác là lợi ích của thị trấn lớn</td></tr>
+              <tr><td>Internet slang</td><td>gợi ý rằng cộng đồng ảo thường phát triển tiếng lóng riêng</td></tr>
+              <tr><td>Việc bán The WELL</td><td>cho thấy cộng đồng này quan trọng thế nào với thành viên</td></tr>
+              <tr><td>Số lượng thành viên (hàng triệu/tỷ)</td><td>nhấn mạnh sự phổ biến của cộng đồng ảo</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. READING 2 ============ -->
+  <section class="unit" id="s4">
+    <div class="sec-head"><span class="idx">4</span><h2>Bài đọc 2: The Power of Two</h2></div>
+
+    <div class="sticky-board">
+      <div class="sticky-note c1">
+        <span class="tag">¶1</span>
+        <p>Ai cũng có 2 "bản thân" (ngoài đời và online) và ai cũng muốn tốt hơn: nhớ tốt hơn, tư duy tốt hơn, kiếm nhiều tiền hơn, nhiều bạn hơn, sáng tạo hơn. Cách đơn giản: thông thạo 2 ngôn ngữ (fluent in two languages).</p>
+      </div>
+      <div class="sticky-note c2">
+        <span class="tag">¶2</span>
+        <p>Trước đây song ngữ bị cho là có hại: gia đình hai nền văn hóa bị warned không cho con nói cả hai thứ tiếng; một giáo sư Cambridge cho rằng não trẻ song ngữ phát triển chỉ bằng một nửa. Nghiên cứu mới cho thấy các lý thuyết cũ hoàn toàn sai (backward): nói 2 ngôn ngữ thật ra beneficial.</p>
+      </div>
+      <div class="sticky-note c3">
+        <span class="tag">¶3</span>
+        <p>Song ngữ boost executive function trong não: nhóm kỹ năng mental giúp ta nhớ điều mới, tư duy linh hoạt (flexible), kiểm soát hành vi, đặt mục tiêu, lập kế hoạch. Người song ngữ làm việc/học tốt vì có working memory tốt, nghĩ theo nhiều cách, tập trung vào nhiệm vụ. Một nghiên cứu: kiếm nhiều hơn trung bình khoảng $125,000 trong sự nghiệp. Có thể bảo vệ não khỏi các vấn đề tuổi già.</p>
+      </div>
+      <div class="sticky-note c1">
+        <span class="tag">¶4</span>
+        <p>Người bicultural (thuộc 2 nền văn hóa) hiểu sâu cả hai, có nhiều cơ hội kết bạn, biết nhiều người và ý tưởng hơn, open to các nền văn hóa khác, dễ thấy vấn đề từ nhiều góc nhìn. Họ thường sáng tạo và accomplish nhiều. Ví dụ: người Nhật gốc Ý.</p>
+      </div>
+      <div class="sticky-note c2">
+        <span class="tag">¶5</span>
+        <p>Người không song ngữ/bicultural vẫn có lợi. Chỉ cần quá trình học ngôn ngữ mới đã boost executive function (không cần thành thạo hoàn toàn). Sống/đến nước khác hoặc sống trong multicultural community cũng tốt; chỉ cần cố gắng open to văn hóa khác cũng có lợi. Tương lai, nghiên cứu có thể cho thấy tìm hiểu văn hóa mới qua virtual communities cũng beneficial.</p>
+      </div>
+    </div>
+
+    <h3 class="sub">Main ideas (Reading 2 – Main Ideas B)</h3>
+    <div class="reveal" data-reveal>
+      <div class="q">Chọn 4 câu ý chính đúng <span class="toggle">Bấm để xem ▾</span></div>
+      <div class="a">
+        Chọn câu <b>3, 5, 6, 8</b>:<br>
+        3 — It's beneficial to be open to others and to have good executive function.<br>
+        5 — Past ideas about being bilingual are very different from current ones.<br>
+        6 — People who aren't bilingual or bicultural can also improve their abilities.<br>
+        8 — Being bilingual or bicultural helps people accomplish things in their lives.<br><br>
+        Các câu còn lại: câu 1 (biết hơn 2 ngôn ngữ là xấu) và câu 7 (học song ngữ tốn nhiều tiền) là ý tác giả không nói; câu 2 (người sáng tạo cởi mở gặp người khác nghề) cũng không nói; câu 4 (song ngữ kiếm nhiều tiền hơn) chỉ là chi tiết phụ.
+      </div>
+    </div>
+
+    <h3 class="sub">Apply D – Tìm ví dụ cho từng cách hỗ trợ</h3>
+    <div class="twrap">
+      <table>
+        <thead><tr><th style="width:22%">Cách hỗ trợ</th><th class="num">Đoạn</th><th>Ví dụ trong bài</th></tr></thead>
+        <tbody>
+          <tr><td>With a citation</td><td class="num">¶2</td><td>"According to some experts at the time…", "One professor at Cambridge University…"</td></tr>
+          <tr><td>With general research</td><td class="num">¶1</td><td>"…studies suggest there is a surprisingly simple way…"</td></tr>
+          <tr><td>With a statistic</td><td class="num">¶3</td><td>people who know two languages might earn about $125,000 more</td></tr>
+          <tr><td>With an example</td><td class="num">¶4</td><td>"For example, someone from a Japanese-Italian family…"</td></tr>
+          <tr><td>With a reason</td><td class="num">¶3 / ¶5</td><td>vd: "…because they have good working memory"; "…beneficial because it boosts executive function"</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">Details C – Câu này có thể thêm vào đoạn nào?</h3>
+    <p class="lead">(gợi ý, hãy tự kiểm tra lại) — bấm từng câu để xem đoạn gợi ý.</p>
+    <div class="reveal-grid" id="detailsC"></div>
+  </section>
+
+  <!-- ============ 5. READING SKILLS ============ -->
+  <section class="unit" id="s5">
+    <div class="sec-head"><span class="idx">5</span><h2>Reading skills</h2></div>
+    <h3 class="sub">Recognize how information is supported – 6 cách tác giả hỗ trợ ý</h3>
+    <div class="methods">
+      <div class="method"><div class="no">1</div><div class="name">Citations / specific references</div><div class="cue">"According to the World Health Organization, …"</div></div>
+      <div class="method"><div class="no">2</div><div class="name">General research</div><div class="cue">"A recent study suggests that …"</div></div>
+      <div class="method"><div class="no">3</div><div class="name">Statistics</div><div class="cue">"Over 40 percent of companies …"</div></div>
+      <div class="method"><div class="no">4</div><div class="name">Examples</div><div class="cue">"One early example was …"</div></div>
+      <div class="method"><div class="no">5</div><div class="name">Reasons</div><div class="cue">"This was an important change because …"</div></div>
+      <div class="method"><div class="no">6</div><div class="name">Personal anecdotes</div><div class="cue">"I had this experience once in college …"</div></div>
+    </div>
+    <div class="box">
+      <h4>Cần nhớ</h4>
+      <p>• Tác giả có thể không cần hỗ trợ cho thông tin lịch sử, sự kiện hoặc ý tưởng mà ai cũng biết là đúng (→ NS).</p>
+      <p>• Understand a writer's purpose: tác giả ít khi nói thẳng vì sao chọn thông tin đó, nên phải tự suy luận ý nghĩa tổng thể.</p>
+    </div>
+  </section>
+
+  <!-- ============ 6. WRITING ============ -->
+  <section class="unit" id="s6">
+    <div class="sec-head"><span class="idx">6</span><h2>Writing: Opinion essay</h2></div>
+    <p class="lead"><b>Unit task:</b> "Do you agree or disagree that joining online communities is good for teenagers?"</p>
+
+    <div class="row2">
+      <div>
+        <h3 class="sub">Cấu trúc bài văn</h3>
+        <div class="twrap">
+          <table>
+            <thead><tr><th style="width:36%">Phần</th><th>Gồm</th></tr></thead>
+            <tbody>
+              <tr><td>Introductory paragraph</td><td>Background information về chủ đề + thesis statement (ý chính, nêu ý kiến của bạn).</td></tr>
+              <tr><td>Body paragraphs (2–3 đoạn)</td><td>Mỗi đoạn có một topic sentence (nêu một lý do cho ý kiến) + supporting ideas (bằng chứng/ví dụ). Mỗi đoạn tập trung một ý = unity.</td></tr>
+              <tr><td>Concluding paragraph</td><td>Summary sentence (tóm tắt ý kiến và lý do) + có thể thêm final thought.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <h3 class="sub">Writing tip: Anecdote</h3>
+        <div class="box amber" style="margin-top:0">
+          <p>Dùng anecdote (ví dụ/câu chuyện từ đời sống cá nhân) để thu hút người đọc và tạo kết nối với chủ đề. Anecdote phải liên quan rõ ràng đến chủ đề; có thể nhắc lại ở các đoạn khác để giữ sự chú ý.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub">Essay mẫu: "Online Communities: Not for Young People"</h3>
+    <div class="twrap">
+      <table>
+        <thead><tr><th style="width:14%">Phần</th><th style="width:43%">Topic sentence</th><th>Supporting idea(s)</th></tr></thead>
+        <tbody>
+          <tr><td>Intro</td><td>Thesis: There are three reasons why young people should not join online communities.</td><td>Bạn bè là thành viên nên trẻ muốn tham gia, nhưng cộng đồng online có thể ảnh hưởng tiêu cực.</td></tr>
+          <tr><td>Body 1 (cảm xúc)</td><td>First, studies show that using social media a lot can cause emotional problems.</td><td>People that spend a lot of time in online communities are more likely to feel worried and unhappy; FOMO (fear of missing out).</td></tr>
+          <tr><td>Body 2 (giấc ngủ)</td><td>Second, many young people I know spend a lot of time looking at social media on their phones and tablets.</td><td>According to a recent documentary about this topic, looking at screens too much can make it harder to sleep → serious health problems, stress.</td></tr>
+          <tr><td>Body 3 (học tập)</td><td>Finally, spending too much time online can have a negative impact on young people's education.</td><td>Anecdote: "My parents always say that my sisters and I enjoy chatting online with our friends more than studying…"</td></tr>
+          <tr><td>Conclusion</td><td>Virtual communities are good in some ways, but they can affect young people's mental and physical health, as well as their future success.</td><td>Final thought: parents and other adults should limit how much time children and teenagers spend in these communities.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="lead">Các cách hỗ trợ dùng trong bài mẫu: general research ("studies show"), citation ("According to a recent documentary…", "One expert in the film said…"), example/reason (FOMO), anecdote ("My parents always say…").</p>
+
+    <h3 class="sub">Checklist Revise &amp; Edit</h3>
+    <ul class="checklist" id="checklist"></ul>
+  </section>
+
+  <!-- ============ 7. GRAMMAR ============ -->
+  <section class="unit" id="s7">
+    <div class="sec-head"><span class="idx">7</span><h2>Grammar: Adjective clauses</h2></div>
+    <p class="lead">Adjective clause miêu tả hoặc cho thêm thông tin về một danh từ. Nó bắt đầu bằng relative pronoun: <b>who/that</b> (người), <b>that/which</b> (vật). Adjective clause đứng ngay sau danh từ mà nó bổ nghĩa; có thể ở giữa hoặc cuối câu.</p>
+
+    <div class="gcards">
+      <div class="gcard">
+        <h4>Subject adjective clause</h4>
+        <div class="formula">noun + relative pronoun + verb</div>
+        <div class="rule">Đại từ quan hệ là chủ ngữ, <b>không được bỏ</b>. Động từ chia theo danh từ được thay thế.</div>
+        <div class="ex">Most of the people <u>who/that live in big cities</u> are strangers to each other.<br>It's a virtual community <u>that/which helps people make new friends</u>.</div>
+      </div>
+      <div class="gcard">
+        <h4>Object adjective clause</h4>
+        <div class="formula">noun + relative pronoun + subject + verb</div>
+        <div class="rule">Đại từ quan hệ là tân ngữ, <b>có thể bỏ</b>.</div>
+        <div class="ex">Most of the people <u>(who/that) she knows</u> live in urban areas.<br>I joined an online community <u>(that/which) my friends also belong to</u>.</div>
+      </div>
+      <div class="gcard" style="background:var(--accent-soft)">
+        <h4>Mẹo phân biệt</h4>
+        <div class="rule" style="color:var(--ink)">Sau relative pronoun là <b>verb</b> → subject clause (không bỏ được).</div>
+        <div class="rule" style="color:var(--ink)">Sau relative pronoun là <b>subject + verb</b> → object clause (bỏ được đại từ quan hệ).</div>
+      </div>
+    </div>
+
+    <h3 class="sub">Bài tập D – Middle hay end?</h3>
+    <p class="lead">Bấm vào từng câu để kiểm tra vị trí và loại mệnh đề.</p>
+    <div class="reveal-grid" id="grammarD"></div>
+
+    <h3 class="sub">Bài tập C – 3 adjective clauses trong essay mẫu</h3>
+    <ul class="bullets">
+      <li>People <u>that spend a lot of time in online communities</u> are more likely to feel worried and unhappy. <i>(noun: people)</i></li>
+      <li>…many young people <u>(that) I know</u> spend a lot of time looking at social media. <i>(noun: young people, object clause bỏ đại từ)</i></li>
+      <li>…children <u>who don't study enough</u> often find it hard to be successful. <i>(noun: children)</i></li>
+    </ul>
+  </section>
+
+  <!-- ============ 8. FIX + NUMBERS ============ -->
+  <section class="unit" id="s8">
+    <div class="sec-head"><span class="idx">8</span><h2>Chỗ cần sửa và con số cần nhớ</h2></div>
+
+    <div class="box fix">
+      <h4>Sửa lại trong bài của bạn</h4>
+      <p>• Trang 4, câu 2: đáp án là <b>community</b> (không phải "urban community").</p>
+      <p>• Grammar D, câu 4: "The bilingual people who I know are all very successful" → clause ở giữa, tick <b>middle</b>, không phải end.</p>
+    </div>
+
+    <h3 class="sub">Con số và mốc quan trọng</h3>
+    <div class="numgrid" id="numgrid"></div>
+  </section>
+
+  <footer>Unit 1 · Worlds Within Worlds — tóm tắt ôn thi, giữ nguyên nội dung gốc.</footer>
+</main>
+
+<script>
+(function(){
+  var deck1 = [
+    ["trend","(n)","xu hướng","a situation that is continuing to change or develop"],
+    ["community","(n)","cộng đồng; nơi sinh sống","a place where people live; a group of people with similar interests"],
+    ["surrounded","(adj)","bị bao quanh","having something all around it"],
+    ["rural","(adj)","thuộc nông thôn","relating to the countryside"],
+    ["urban","(adj)","thuộc thành thị","relating to towns or cities"],
+    ["virtual","(adj)","ảo, trên mạng","done or seen on the Internet or a computer"],
+    ["powerful","(adj)","mạnh mẽ","very strong and effective; able to do a lot"],
+    ["advanced","(adj)","tiên tiến, hiện đại","very modern; recently developed or improved"],
+    ["paradox","(n)","nghịch lý","a situation that is hard to understand because it has two opposite qualities"],
+    ["privacy","(n)","quyền riêng tư","freedom to keep personal information secret"]
+  ];
+  var deck2 = [
+    ["open to","(adj)","sẵn sàng đón nhận, cởi mở","comfortable with; willing to try"],
+    ["multicultural","(adj)","đa văn hóa","including people from different countries"],
+    ["flexible","(adj)","linh hoạt","able to change easily to fit into new situations"],
+    ["beneficial","(adj)","có lợi","helpful, useful, or positive"],
+    ["bilingual","(adj)","song ngữ","able to speak two languages well"],
+    ["mental","(adj)","thuộc tinh thần, trí óc","related to the mind or thinking"],
+    ["accomplish","(v)","đạt được, hoàn thành","to achieve something after doing it for a long time"],
+    ["function","(v)","hoạt động (hiệu quả)","to work or perform in the correct way"],
+    ["boost","(v)","thúc đẩy, tăng cường","to improve or increase something"],
+    ["warn","(v)","cảnh báo","to tell somebody about a possible danger or problem"]
+  ];
+  var minorWords = [
+    ["Aristotle","nhà triết học và nhà văn của Hy Lạp cổ đại"],
+    ["nature (n)","bản chất (the basic quality of someone or something)"],
+    ["megacity (n)","thành phố có hơn 10 triệu dân (VD: Shanghai, Mexico City, Istanbul)"],
+    ["hang out with (v phr)","dành thời gian với ai"],
+    ["backward (adj)","không tiên tiến (not advanced)"],
+    ["working memory (n)","phần trí nhớ lưu thông tin dùng để xử lý tình huống/nhiệm vụ hiện tại"]
+  ];
+  var timeline = [
+    ["1860s","Telegraph","Các nhân viên điện báo, cách nhau hàng trăm/nghìn dặm, lúc rảnh chat, đùa, chơi game. Họ chưa từng gặp nhau. Đây là virtual meetings đầu tiên."],
+    ["1960s","CB radio (Citizen's Band)","Tài xế xe tải/nhân viên bán hàng liên lạc over short distances khi lái xe. Có tên riêng (handles) và tiếng lóng: \"negatory\" = no, \"copy that\" = I understand. Giống Internet slang (LOL = laugh out loud)."],
+    ["1980s","The WELL","Máy tính chưa mạnh: chỉ đăng tin nhắn, chia sẻ tin tức, chưa có music hay photos. Nay đã hơn 35 tuổi. Năm 2012, khi bán The WELL, một số thành viên đã mua để giữ cho nó hoạt động."],
+    ["Đầu 2000s","Second Life","Thế giới 3-D ảo: khám phá, mua bán bằng virtual money, nghe music, chơi online sports, tự tạo cộng đồng riêng. Là một trong những cộng đồng online đầu tiên quan trọng với giáo dục và kinh doanh."],
+    ["Hiện nay","Hàng nghìn cộng đồng","Nhiều nơi có hàng triệu/tỷ active members. Nhiều người nghĩ sẽ còn quan trọng hơn."],
+    ["Tương lai","?","Lo ngại mất privacy vì đăng thông tin cá nhân → có thể con người lại dành phần lớn thời gian ở real communities."]
+  ];
+  var detailsC = [
+    ["a","For example, one study showed bicultural people did well on creativity tests.","¶4"],
+    ["b","So, visiting or moving to another place may not even be necessary.","¶5"],
+    ["c","Bilingual people may still experience issues related to aging but may get them later in life.","¶3"],
+    ["d","Some members of virtual communities have several online selves.","¶1"],
+    ["e","It was felt that being bilingual might lead to serious emotional problems.","¶2"],
+    ["f","This is because some employers pay more for those skills because they believe they are valuable.","¶3 (sau câu $125,000)"]
+  ];
+  var grammarD = [
+    ["1","He joined an online community that has millions of members.","end","subject"],
+    ["2","The person who shared the videos did not worry about his privacy.","middle","subject"],
+    ["3","She recently moved to a city which is very multicultural.","end","subject"],
+    ["4","The bilingual people who I know are all very successful.","middle","object"],
+    ["5","The information I found online doesn't seem correct.","middle","object (bỏ that)"],
+    ["6","They became friends with somebody who lives in another country.","end","subject"]
+  ];
+  var checklistItems = [
+    "Có intro với background information và thesis statement?",
+    "Có 2–3 body paragraphs, mỗi đoạn có topic sentence + supporting ideas?",
+    "Mỗi body paragraph chỉ tập trung một ý (unity)?",
+    "Kết luận có tóm tắt ý kiến và lý do?",
+    "Dùng adjective clauses đúng chưa?",
+    "Kiểm tra lỗi chính tả, chọn từ, dấu câu, ngữ pháp.",
+    "Câu có đa dạng độ dài và cấu trúc (dài/ngắn)?"
+  ];
+  var numbers = [
+    ["150 người","Số người tối đa trong nhóm nhỏ ở nông thôn thời xưa"],
+    ["9,500 năm trước","Làng và thị trấn bắt đầu hình thành"],
+    ["Hơn 1/2 dân số thế giới","Sống ở thị trấn, thành phố, megacity (theo Liên Hợp Quốc)"],
+    ["10 triệu người","Megacity là thành phố có hơn 10 triệu dân"],
+    ["1860s / 1960s / 1980s / early 2000s","Telegraph / CB radio / The WELL / Second Life"],
+    ["35 năm, năm 2012","The WELL hơn 35 tuổi; 2012 được rao bán, thành viên mua để giữ nó hoạt động"],
+    ["$125,000","Người biết 2 ngôn ngữ có thể kiếm thêm trung bình khoảng số tiền này trong sự nghiệp"]
+  ];
+
+  function el(tag, cls, html){ var e=document.createElement(tag); if(cls) e.className=cls; if(html!=null) e.innerHTML=html; return e; }
+
+  function buildDeck(container, data){
+    data.forEach(function(item){
+      var card = el('div','flashcard');
+      var inner = el('div','flashcard-inner');
+      var front = el('div','face front', '<div class="word">'+item[0]+'</div><div class="pos">'+item[1]+'</div><div class="hint">chạm để lật</div>');
+      var back = el('div','face back', '<div class="vi">'+item[2]+'</div><div class="def">'+item[3]+'</div>');
+      inner.appendChild(front); inner.appendChild(back);
+      card.appendChild(inner);
+      card.addEventListener('click', function(){ card.classList.toggle('flipped'); });
+      container.appendChild(card);
+    });
+  }
+  buildDeck(document.querySelector('[data-deck="1"]'), deck1);
+  buildDeck(document.querySelector('[data-deck="2"]'), deck2);
+
+  var minorTbody = document.getElementById('minorWords');
+  minorWords.forEach(function(row){
+    minorTbody.appendChild(el('tr','', '<td><b>'+row[0]+'</b></td><td>'+row[1]+'</td>'));
+  });
+
+  var tlWrap = document.getElementById('timeline');
+  timeline.forEach(function(row){
+    var item = el('div','tl-item');
+    item.innerHTML = '<div class="when">'+row[0]+'</div><div class="what">'+row[1]+'</div><div class="desc">'+row[2]+'</div>';
+    tlWrap.appendChild(item);
+  });
+
+  document.querySelectorAll('.reveal').forEach(function(r){
+    r.addEventListener('click', function(){ r.classList.toggle('open'); });
+  });
+
+  var dcWrap = document.getElementById('detailsC');
+  detailsC.forEach(function(row){
+    var r = el('div','reveal');
+    r.innerHTML = '<div class="q"><span>'+row[0]+') '+row[1]+'</span> <span class="toggle">Đoạn? ▾</span></div><div class="a">Đoạn gợi ý: <b>'+row[2]+'</b></div>';
+    r.addEventListener('click', function(){ r.classList.toggle('open'); });
+    dcWrap.appendChild(r);
+  });
+
+  var gdWrap = document.getElementById('grammarD');
+  grammarD.forEach(function(row){
+    var r = el('div','reveal');
+    r.innerHTML = '<div class="q"><span>'+row[0]+'. '+row[1]+'</span> <span class="toggle">Đáp án ▾</span></div><div class="a">Vị trí: <b>'+row[2]+'</b> &nbsp;·&nbsp; Loại: <b>'+row[3]+'</b></div>';
+    r.addEventListener('click', function(){ r.classList.toggle('open'); });
+    gdWrap.appendChild(r);
+  });
+
+  var clWrap = document.getElementById('checklist');
+  var saved = {};
+  try{ saved = JSON.parse(localStorage.getItem('u1-checklist')||'{}'); }catch(e){ saved = {}; }
+  checklistItems.forEach(function(text, i){
+    var li = el('li','', '');
+    var cb = document.createElement('input');
+    cb.type='checkbox'; cb.id='chk'+i;
+    if(saved[i]) { li.classList.add('checked'); cb.checked = true; }
+    li.appendChild(cb); li.appendChild(el('span','', text));
+    li.addEventListener('click', function(){
+      cb.checked = !cb.checked;
+      li.classList.toggle('checked', cb.checked);
+      saved[i] = cb.checked;
+      try{ localStorage.setItem('u1-checklist', JSON.stringify(saved)); }catch(err){}
+    });
+    clWrap.appendChild(li);
+  });
+
+  var ngWrap = document.getElementById('numgrid');
+  numbers.forEach(function(row){
+    ngWrap.appendChild(el('div','numcell', '<div class="big">'+row[0]+'</div><div class="lbl">'+row[1]+'</div>'));
+  });
+
+  var sections = Array.prototype.slice.call(document.querySelectorAll('section.unit'));
+  var links = Array.prototype.slice.call(document.querySelectorAll('#navLinks a'));
+  var progressBar = document.getElementById('progressBar');
+  function onScroll(){
+    var scrollTop = window.scrollY || document.documentElement.scrollTop;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = docHeight>0 ? Math.min(100, Math.round((scrollTop/docHeight)*100)) : 0;
+    progressBar.style.width = pct+'%';
+    var current = null;
+    sections.forEach(function(sec){ if (sec.getBoundingClientRect().top - 120 <= 0) current = sec; });
+    var nav = document.getElementById('navLinks');
+    links.forEach(function(a){
+      var active = current && a.getAttribute('href') === '#'+current.id;
+      var was = a.classList.contains('active');
+      a.classList.toggle('active', !!active);
+      if(active && !was){
+        var left = a.offsetLeft - (nav.clientWidth - a.offsetWidth)/2;
+        nav.scrollTo({left:Math.max(0,left), behavior:'smooth'});
+      }
+    });
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
+</script>
+
+</body>
+</html>
