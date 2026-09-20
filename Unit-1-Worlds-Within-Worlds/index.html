@@ -312,6 +312,49 @@ td.num,th.num{text-align:center; font-variant-numeric:tabular-nums; width:3em; c
 .gcard .ex{font-size:.98rem; margin-top:10px; padding-top:10px; border-top:1px dashed var(--line); font-style:italic;}
 .gcard .ex u{text-decoration-color:var(--accent2); text-decoration-thickness:2px;}
 
+/* ---------- Full essay with annotations ---------- */
+.essay-tools{display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between; margin-bottom:14px;}
+.legend{display:flex; flex-wrap:wrap; gap:8px;}
+.lg{font-size:.8rem; font-weight:600; padding:4px 10px; border-radius:99px; border:1px solid var(--line); background:var(--paper);}
+.lg::before{content:''; display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:6px; vertical-align:-1px; background:var(--c);}
+.lg-bg{--c:#b9a9d2;} .lg-thesis{--c:#613087;} .lg-topic{--c:#dd5a28;} .lg-support{--c:#fcb715;}
+.lg-anec{--c:#2e9e5b;} .lg-sum{--c:#2f7fb8;} .lg-final{--c:#7e5aa0;} .lg-link{--c:#c9c3d3;}
+.btn-toggle{
+  background:var(--accent); color:#fff; border:none; border-radius:99px; padding:9px 16px; font:inherit; font-size:.9rem; font-weight:600; cursor:pointer;
+}
+.btn-toggle:hover{background:var(--accent-deep);}
+.essay{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:26px 28px; margin-bottom:12px;}
+.essay-title{font-size:1.5rem; font-weight:900; text-align:center; color:var(--accent); margin-bottom:22px;}
+.epara{display:grid; grid-template-columns:150px 1fr 320px; gap:18px; padding:18px 0; border-top:1px dashed var(--line); align-items:start;}
+.epara:first-of-type{border-top:none;}
+.ep-label{font-weight:700; color:var(--accent); font-size:.95rem; line-height:1.3;}
+.ep-no{display:block; font-size:.75rem; letter-spacing:.08em; text-transform:uppercase; color:var(--accent2); margin-bottom:4px;}
+.ep-text{font-size:1.08rem; line-height:1.9;}
+.ep-text u{text-decoration-color:var(--accent); text-decoration-thickness:2px; text-underline-offset:3px;}
+.ep-notes{font-size:.9rem; color:var(--ink-soft); background:var(--card); border-radius:12px; padding:12px 14px; display:flex; flex-direction:column; gap:8px;}
+.ep-notes b{color:var(--ink);}
+.hl{padding:2px 4px; border-radius:5px; box-decoration-break:clone; -webkit-box-decoration-break:clone; position:relative; cursor:help;}
+.hl-bg{background:#ece6f4; box-shadow:inset 0 -3px 0 #b9a9d2;}
+.hl-thesis{background:#e7d9f5; box-shadow:inset 0 -3px 0 #613087; font-weight:700;}
+.hl-topic{background:#fde4d6; box-shadow:inset 0 -3px 0 #dd5a28; font-weight:700;}
+.hl-support{background:#fff3cf; box-shadow:inset 0 -3px 0 #fcb715;}
+.hl-anec{background:#dff3e6; box-shadow:inset 0 -3px 0 #2e9e5b; font-style:italic;}
+.hl-sum{background:#dcebf7; box-shadow:inset 0 -3px 0 #2f7fb8; font-weight:700;}
+.hl-final{background:#ece2f5; box-shadow:inset 0 -3px 0 #7e5aa0;}
+.hl-link{background:transparent; box-shadow:inset 0 -3px 0 #c9c3d3; color:var(--ink-soft);}
+.hl-bg,.hl-thesis,.hl-topic,.hl-support,.hl-anec,.hl-sum,.hl-final{color:#262234;}
+.hl::after{
+  content:attr(data-note); position:absolute; left:0; bottom:calc(100% + 6px); z-index:5;
+  background:#262234; color:#fff; font-size:.75rem; font-weight:500; font-style:normal; padding:5px 9px; border-radius:7px; white-space:nowrap;
+  opacity:0; pointer-events:none; transition:opacity .15s;
+}
+.hl:hover::after{opacity:1;}
+.essay.plain .hl{background:transparent; box-shadow:none; font-weight:400; font-style:normal; color:var(--ink); cursor:auto; padding:0;}
+.essay.plain .hl::after{display:none;}
+.essay.plain .ep-notes{display:none;}
+.essay.plain .epara{grid-template-columns:150px 1fr;}
+.essay.plain .ep-text u{text-decoration:none;}
+
 /* ---------- Checklist ---------- */
 .checklist{list-style:none; margin:0 0 20px; padding:0; display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:10px;}
 .checklist li{
@@ -350,6 +393,10 @@ footer{text-align:center; padding:30px 20px 10px; color:var(--ink-soft); font-si
   .checklist{grid-template-columns:1fr;}
   .sticky-board{grid-template-columns:1fr; gap:24px;}
   .split{grid-template-columns:1fr; gap:10px;}
+  .epara,.essay.plain .epara{grid-template-columns:1fr; gap:10px;}
+  .essay{padding:18px 16px;}
+  .ep-text{font-size:1rem;}
+  .hl::after{white-space:normal; max-width:80vw;}
   .split-read{position:static; max-height:none; overflow:visible; padding:0;}
   .sticky-note{--r:0deg !important;}
   .timeline{grid-template-columns:1fr; gap:14px;}
@@ -650,6 +697,93 @@ footer{text-align:center; padding:30px 20px 10px; color:var(--ink-soft); font-si
     </div>
     <p class="lead">Các cách hỗ trợ dùng trong bài mẫu: general research ("studies show"), citation ("According to a recent documentary…", "One expert in the film said…"), example/reason (FOMO), anecdote ("My parents always say…").</p>
 
+    <h3 class="sub">Bài essay hoàn chỉnh (ghép từ bảng trên, có chú thích từng phần)</h3>
+    <div class="essay-tools">
+      <div class="legend">
+        <span class="lg lg-bg">Background information</span>
+        <span class="lg lg-thesis">Thesis statement</span>
+        <span class="lg lg-topic">Topic sentence</span>
+        <span class="lg lg-support">Supporting idea</span>
+        <span class="lg lg-anec">Anecdote</span>
+        <span class="lg lg-sum">Summary sentence</span>
+        <span class="lg lg-final">Final thought</span>
+        <span class="lg lg-link">Câu nối (thêm để bài liền mạch)</span>
+      </div>
+      <button class="btn-toggle" id="essayToggle" type="button">Ẩn chú thích – đọc bài trơn</button>
+    </div>
+
+    <div class="essay" id="essay">
+      <div class="essay-title">Online Communities: Not for Young People</div>
+
+      <div class="epara">
+        <div class="ep-label"><span class="ep-no">Intro</span>Introductory paragraph</div>
+        <div class="ep-text">
+          <span class="hl hl-link" data-note="Câu nối">Today, many young people want to join online communities because their friends are already members.</span>
+          <span class="hl hl-bg" data-note="Background information">These communities can be fun, but they can also have a negative effect on young people.</span>
+          <span class="hl hl-thesis" data-note="Thesis statement – nêu ý kiến + báo trước 3 lý do">There are three reasons why young people should not join online communities.</span>
+        </div>
+        <div class="ep-notes">
+          <div><b>Background information</b>: giới thiệu chủ đề (bạn bè là thành viên nên trẻ muốn tham gia, nhưng cộng đồng online có thể ảnh hưởng tiêu cực).</div>
+          <div><b>Thesis statement</b>: ý kiến của người viết + báo trước có 3 lý do → 3 body paragraphs.</div>
+        </div>
+      </div>
+
+      <div class="epara">
+        <div class="ep-label"><span class="ep-no">Body 1</span>Cảm xúc</div>
+        <div class="ep-text">
+          <span class="hl hl-topic" data-note="Topic sentence – lý do 1">First, studies show that using social media a lot can cause emotional problems.</span>
+          <span class="hl hl-support" data-note="Supporting idea – general research">People <u>that spend a lot of time in online communities</u> are more likely to feel worried and unhappy.</span>
+          <span class="hl hl-support" data-note="Supporting idea – example/reason">One example of this is FOMO (fear of missing out).</span>
+        </div>
+        <div class="ep-notes">
+          <div><b>Topic sentence</b>: mở bằng <i>First</i>, nêu lý do 1 (cảm xúc).</div>
+          <div><b>Supporting ideas</b>: general research (<i>"studies show"</i>) + example/reason (FOMO).</div>
+          <div><b>Adjective clause</b>: <i>People that spend a lot of time…</i> (subject clause, noun: people).</div>
+        </div>
+      </div>
+
+      <div class="epara">
+        <div class="ep-label"><span class="ep-no">Body 2</span>Giấc ngủ</div>
+        <div class="ep-text">
+          <span class="hl hl-topic" data-note="Topic sentence – lý do 2">Second, many young people <u>I know</u> spend a lot of time looking at social media on their phones and tablets.</span>
+          <span class="hl hl-support" data-note="Supporting idea – citation">According to a recent documentary about this topic, looking at screens too much can make it harder to sleep.</span>
+          <span class="hl hl-support" data-note="Supporting idea – citation">One expert in the film said that this can lead to serious health problems and stress.</span>
+        </div>
+        <div class="ep-notes">
+          <div><b>Topic sentence</b>: mở bằng <i>Second</i>, nêu lý do 2 (giấc ngủ).</div>
+          <div><b>Supporting ideas</b>: citation (<i>"According to a recent documentary…"</i>, <i>"One expert in the film said…"</i>) → hậu quả: khó ngủ, vấn đề sức khỏe, stress.</div>
+          <div><b>Adjective clause</b>: <i>young people (that) I know</i> (object clause, đã bỏ đại từ quan hệ).</div>
+        </div>
+      </div>
+
+      <div class="epara">
+        <div class="ep-label"><span class="ep-no">Body 3</span>Học tập</div>
+        <div class="ep-text">
+          <span class="hl hl-topic" data-note="Topic sentence – lý do 3">Finally, spending too much time online can have a negative impact on young people's education.</span>
+          <span class="hl hl-anec" data-note="Anecdote – câu chuyện cá nhân">My parents always say that my sisters and I enjoy chatting online with our friends more than studying.</span>
+          <span class="hl hl-support" data-note="Supporting idea – reason">Children <u>who don't study enough</u> often find it hard to be successful.</span>
+        </div>
+        <div class="ep-notes">
+          <div><b>Topic sentence</b>: mở bằng <i>Finally</i>, nêu lý do 3 (học tập).</div>
+          <div><b>Anecdote</b>: ví dụ từ đời sống cá nhân (<i>"My parents always say…"</i>) để thu hút người đọc.</div>
+          <div><b>Adjective clause</b>: <i>children who don't study enough</i> (subject clause, noun: children).</div>
+        </div>
+      </div>
+
+      <div class="epara">
+        <div class="ep-label"><span class="ep-no">Kết</span>Concluding paragraph</div>
+        <div class="ep-text">
+          <span class="hl hl-sum" data-note="Summary sentence – tóm tắt ý kiến + 3 lý do">Virtual communities are good in some ways, but they can affect young people's mental and physical health, as well as their future success.</span>
+          <span class="hl hl-final" data-note="Final thought – đề xuất">For this reason, parents and other adults should limit how much time children and teenagers spend in these communities.</span>
+        </div>
+        <div class="ep-notes">
+          <div><b>Summary sentence</b>: nhắc lại ý kiến và gói 3 lý do (mental health = cảm xúc, physical health = giấc ngủ, future success = học tập).</div>
+          <div><b>Final thought</b>: đề xuất hành động cho người lớn.</div>
+        </div>
+      </div>
+    </div>
+    <p class="lead">Các câu trong bài lấy nguyên từ bảng và các ví dụ trong tài liệu; chỉ thêm câu nối (đánh dấu riêng) để ghép thành bài hoàn chỉnh.</p>
+
     <h3 class="sub">Checklist Revise &amp; Edit</h3>
     <ul class="checklist" id="checklist"></ul>
   </section>
@@ -876,6 +1010,13 @@ footer{text-align:center; padding:30px 20px 10px; color:var(--ink-soft); font-si
   }
   window.addEventListener('scroll', onScroll, {passive:true});
   onScroll();
+
+  var essay = document.getElementById('essay');
+  var essayToggle = document.getElementById('essayToggle');
+  essayToggle.addEventListener('click', function(){
+    var plain = essay.classList.toggle('plain');
+    essayToggle.textContent = plain ? 'Hiện chú thích' : 'Ẩn chú thích – đọc bài trơn';
+  });
 
   var menuBtn = document.getElementById('menuBtn');
   var toc = document.getElementById('toc');
